@@ -1,0 +1,44 @@
+<div id="sidebar">
+{!--
+	{exp:channel:entries channel="articles|columns" limit="1" status{snip_all_articles} disable="pagination"}
+	{if no_results}
+	{/if}
+	<div class="sidebar_module">
+		<h3 class="article_section">Filed Under...</h3>
+		<ul id="tags">	
+			{exp:tagger:tags entry_id="{entry_id}"}
+			<li>{tagger:tag_name}</li>
+			{/exp:tagger:tags}
+		</ul>
+	</div>
+	{/exp:channel:entries}
+--}
+	<div class="sidebar_module">
+		<h3 class="article_section">Spread The Word</h3>
+		<!-- AddThis Button BEGIN -->
+		<div class="addthis_toolbox addthis_default_style ">
+		<a class="addthis_button_google_plusone"></a>
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		<a class="addthis_button_tweet"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+		<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=seoulistmedia"></script>
+		<!-- AddThis Button END -->
+	</div>
+	{exp:channel:entries channel="articles" limit="1" status{snip_all_articles} disable="pagination"}
+		{articles_additional_media}
+	<div id="additional_media" class="sidebar_module">
+		{exp:imgsizer:size src="{additional_image}" width="230" server_domain="http://media.seoulistmag.com/" base_path="/home/seoulistmag/media.seoulistmag.com/" base_cache="/home/seoulistmag/media.seoulistmag.com/images/sized/"}
+		{if no_results}	
+		{/if}
+		<div class="sidebar_media">
+			<img class="sidebar_media_thumbnail" src="{sized}" width="{width}" height="{height}" alt="{image_credit}" />
+			<!--<a class="enlarge" href="">Enlarge Image</a>-->
+		</div>
+		<p class="caption_small">{additional_caption}</p>
+		{/exp:imgsizer:size}
+	</div>
+		{/articles_additional_media}
+	{/exp:channel:entries}
+	{embed="includes/most_popular"}
+</div>

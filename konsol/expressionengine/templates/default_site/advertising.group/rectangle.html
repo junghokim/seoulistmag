@@ -1,0 +1,18 @@
+<!-- Begin Advertisement Rectangle -->
+<div class="sidebar_ad_container">
+{exp:channel:entries channel="advertising" limit="1" orderby="random" search:ad_type="rectangle" status="open" sort="desc" dynamic="off"}
+{if ad_link !=""}
+	<a href="{ad_link}" onClick="javascript:pageTracker._trackPageview('/outgoing/{ad_link}');" title="{title}">
+{/if}
+<?php
+$imageurl="{ad_artwork}";
+list($width, $height, $type, $attr) = getimagesize("$imageurl");
+$dimensions="";
+echo $dimensions."<img src='$imageurl' width='$width' height='$height' alt='' />";
+?>
+{if ad_link !=""}
+	</a>
+{/if}
+{/exp:channel:entries}
+</div>
+<!-- End Advertisement Rectangle -->

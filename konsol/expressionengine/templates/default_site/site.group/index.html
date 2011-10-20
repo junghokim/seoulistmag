@@ -1,0 +1,234 @@
+{if channel_id=="1"}
+{preload_replace:this_channel="{channel_short_name}"}
+{/if}
+
+{embed="includes/header"}
+		{embed="includes/masthead"}
+<!-- Begin Home -->
+		<div id="slides" class="featured_articles">
+			<ul id="carousel" class="slides_container">
+				{exp:channel:entries channel{snip_all_channels} limit="5" sort="desc" disable="pagination" status="Featured Article"}
+				<li id="{url_title}" class="feature_article">
+					{if channel_id=="1"}
+					{articles_images limit="1"}
+					{exp:imgsizer:size src="{article_image}" width="690" server_domain="http://media.seoulistmag.com/" base_path="/home/seoulistmag/media.seoulistmag.com/" base_cache="/home/seoulistmag/media.seoulistmag.com/images/sized/"}
+					{snip_all_permalink_switch_opening}<img src="{sized}" width="{width}" height="{height}" alt="By {image_credit}" /></a>
+					{/exp:imgsizer:size}
+					{/articles_images}
+										
+					{if:elseif channel_id=="3"}
+					{columns_image limit="1"}
+					{exp:imgsizer:size src="{column_image}" width="690" server_domain="http://media.seoulistmag.com/" base_path="/home/seoulistmag/media.seoulistmag.com/" base_cache="/home/seoulistmag/media.seoulistmag.com/images/sized/"}
+					{snip_all_permalink_switch_opening}<img src="{sized}" width="{width}" height="{height}" alt="By {column_image_credit}" /></a>
+					{/exp:imgsizer:size}
+					{/columns_image}
+					
+					{if:elseif channel_id=="2"}
+					{issue_image limit="1"}
+					{exp:imgsizer:size src="{image}" width="690" server_domain="http://media.seoulistmag.com/" base_path="/home/seoulistmag/media.seoulistmag.com/" base_cache="/home/seoulistmag/media.seoulistmag.com/images/sized/"}
+					{snip_all_permalink_switch_opening}<img src="{sized}" width="{width}" height="{height}" alt="By {credit}" /></a>
+					{/exp:imgsizer:size}
+					{/issue_image}
+					
+					{/if}
+					<div class="article_info">
+						{categories {categories_top_level}}
+						<span class="article_section">{category_name}</span>
+						{/categories}
+						<h3>{snip_all_permalink_switch}</h3>
+						<span class="byline"><span class="byline_prefix">by</span> {author}</span>
+						<p class="article_snippet">
+						{articles_logline}
+						{columns_logline}
+						{issue_logline}
+						</p>
+						<div class="additional_meta">
+							<span class="date">{entry_date {snip_date_short}}</span>
+							{snip_disqus_comment-count}
+						</div>
+					</div>
+				</li>
+				{/exp:channel:entries}
+			</ul>
+			<a class="previous" href="#">Previous</a>
+			<a class="next" href="#">Next</a>
+		</div>
+		
+		<div class="section_module">
+			<h2 class="article_section recent_articles"><span class="section_symbol">&sect;</span> Recent Articles</h2>
+			<ul class="articles_list three_large">
+				{exp:channel:entries channel{snip_all_channels} limit="3" orderby="date" sort="desc" status="Front Page" disable="pagination"}
+				<li class="article">
+					{if channel_id=="1"}
+					{articles_images limit="1"}
+					{exp:imgsizer:size src="{article_image}" width="310" server_domain="http://media.seoulistmag.com/" base_path="/home/seoulistmag/media.seoulistmag.com/" base_cache="/home/seoulistmag/media.seoulistmag.com/images/sized/"}
+					{snip_all_permalink_switch_opening}<img src="{sized}" width="{width}" height="{height}" alt="By {image_credit}" /></a>
+					{/exp:imgsizer:size}
+					{/articles_images}
+					
+					{if:elseif channel_id=="3"}
+					{columns_image limit="1"}
+					{exp:imgsizer:size src="{column_image}" width="310" server_domain="http://media.seoulistmag.com/" base_path="/home/seoulistmag/media.seoulistmag.com/" base_cache="/home/seoulistmag/media.seoulistmag.com/images/sized/"}
+					{snip_all_permalink_switch_opening}<img src="{sized}" width="{width}" height="{height}" alt="By {image_credit}" /></a>
+					{/exp:imgsizer:size}
+					{/columns_image}
+					
+					{if:elseif channel_id=="2"}
+					{issue_image limit="1"}
+					{exp:imgsizer:size src="{image}" width="310" server_domain="http://media.seoulistmag.com/" base_path="/home/seoulistmag/media.seoulistmag.com/" base_cache="/home/seoulistmag/media.seoulistmag.com/images/sized/"}
+					{snip_all_permalink_switch_opening}<img src="{sized}" width="{width}" height="{height}" alt="By {image_credit}" /></a>
+					{/exp:imgsizer:size}
+					{/issue_image}
+					
+					{/if}
+					<div class="article_info">
+						{categories {categories_top_level}}
+						<span class="article_section">{category_name}</span>
+						{/categories}
+						<h3>{snip_all_permalink_switch}</h3>
+						<p class="logline">{articles_logline}{columns_logline}{issue_logline}</p>
+						<div class="additional_meta">
+							<span class="date">{entry_date {snip_date_short}}</span>
+							{snip_disqus_comment-count}
+						</div>
+					</div>
+				</li>
+				{/exp:channel:entries}
+			</ul>
+		</div>
+		{embed="includes/itemsofinterest"}
+		<ul id="columns">
+			{exp:channel:entries channel="columns" category="20" limit="1" orderby="date" sort="desc" status{snip_all_articles} disable="pagination"}
+			{categories}
+			<li id="{category_url_title}" class="column_module">
+				<h2><a href="{path="columns/"}">{category_name}</a></h2>
+				<span class="section_description">{category_description}</span>
+			{/categories}
+				<ul>
+					<li class="article">
+						<span class="column_date">{entry_date {snip_date_long}}</span>
+						<h3><a href="{title_permalink="columns/read"}">{title}</a></h3>
+						<p>{exp:eehive_hacksaw words="35" allow="<b><a>" append="..."}
+						{columns_body}
+						{/exp:eehive_hacksaw}</p>
+					</li>
+				</ul>
+			</li>
+			{/exp:channel:entries}
+			{exp:channel:entries channel="columns" category="21" limit="1" orderby="date" sort="desc" status{snip_all_articles} disable="pagination"}
+			{categories}
+			<li id="{category_url_title}" class="column_module">
+				<h2><a href="{path="columns/"}">{category_name}</a></h2>
+				<span class="section_description">{category_description}</span>
+			{/categories}
+				<ul>
+					<li class="article">
+						<span class="column_date">{entry_date {snip_date_long}}</span>
+						<h3><a href="{title_permalink="columns/read"}">{title}</a></h3>
+						<p>{exp:eehive_hacksaw words="35" allow="<b><a>" append="..."}
+						{columns_body}
+						{/exp:eehive_hacksaw}</p>
+					</li>
+				</ul>
+			</li>
+			{/exp:channel:entries}
+			{exp:channel:entries channel="columns" category="22" limit="1" orderby="date" sort="desc" status{snip_all_articles} disable="pagination"}
+			{categories}
+			<li id="{category_url_title}" class="column_module">
+				<h2><a href="{path="columns/"}">{category_name}</a></h2>
+				<span class="section_description">{category_description}</span>
+			{/categories}
+				<ul>
+					<li class="article">
+						<span class="column_date">{entry_date {snip_date_long}}</span>
+						<h3><a href="{title_permalink="columns/read"}">{title}</a></h3>
+						<p>{exp:eehive_hacksaw words="35" allow="<b><a>" append="..."}
+						{columns_body}
+						{/exp:eehive_hacksaw}</p>
+					</li>
+				</ul>
+			</li>
+			{/exp:channel:entries}
+		</ul>
+		<div id="food_drink" class="section_module">
+			<h2 class="article_section"><span class="section_symbol">&sect;</span> Food + Drink — <span class="section_description">Tingle your tastebuds</span></h2>
+			<a class="view_section" href="{path="section/browse/food_and_drink/"}">View Section</a>
+			<ul class="articles_list three_small">
+				{exp:channel:entries channel="articles" category="11" limit="3" sort="desc" status{snip_all_articles} disable="pagination"}
+				<li class="article">
+					{articles_images limit="1"}
+					{exp:imgsizer:size src="{article_image}" width="175" server_domain="http://media.seoulistmag.com/" base_path="/home/seoulistmag/media.seoulistmag.com/" base_cache="/home/seoulistmag/media.seoulistmag.com/images/sized/"}
+					{snip_all_permalink_switch_opening}<img src="{sized}" width="{width}" height="{height}" alt="By {image_credit}" /></a>
+					{/exp:imgsizer:size}
+					{/articles_images}
+					<div class="article_info">
+						{categories show="12|13|14|15" limit="1"}
+						<span class="article_section">{category_name}</span>
+						{/categories}
+						<h3>
+							{snip_all_permalink_switch}
+						</h3>
+						<div class="additional_meta">
+							<span class="date">{entry_date {snip_date_short}}</span>
+							{snip_disqus_comment-count}
+						</div>
+					</div>
+				</li>
+				{/exp:channel:entries}			
+			</ul>
+		</div>
+		<div id="the_buzz" class="section_module">
+			<h2 class="article_section"><span class="section_symbol">&sect;</span> The Buzz — <span class="section_description">What's new &amp; popular this week</span></h2>
+			<ul class="articles_list three_small">
+				<?php
+					$start_time = $this->EE->localize->decode_date("%Y-%m-%d %H:%i", $this->EE->localize->now - 1209600);
+				?>
+				{exp:channel:entries channel{snip_all_channels} limit="3" sort="desc" orderby="view_count_one" status{snip_all_articles} dynamic="off" start_on="<?php echo $start_time; ?>" disable="pagination"}
+				<li class="article {switch="visual|visual|textual"}">
+					{if {count} < 3 }
+					
+					{if channel_id=="1"}
+					{articles_images limit="1"}
+					{exp:imgsizer:size src="{article_image}" quality="80" width="175" server_domain="http://media.seoulistmag.com/" base_path="/home/seoulistmag/media.seoulistmag.com/" base_cache="/home/seoulistmag/media.seoulistmag.com/images/sized/"}
+					{snip_all_permalink_switch_opening}<img src="{sized}" width="{width}" height="{height}" alt="By {image_credit}" /></a>
+					{/exp:imgsizer:size}
+					{/articles_images}
+										
+					{if:elseif channel_id=="3"}
+					{columns_image limit="1"}
+					{exp:imgsizer:size src="{column_image}" quality="80" width="175" server_domain="http://media.seoulistmag.com/" base_path="/home/seoulistmag/media.seoulistmag.com/" base_cache="/home/seoulistmag/media.seoulistmag.com/images/sized/"}
+					{snip_all_permalink_switch_opening}<img src="{sized}" width="{width}" height="{height}" alt="By {image_credit}" /></a>
+					{/exp:imgsizer:size}
+					{/columns_image}
+					
+					{if:elseif channel_id=="2"}
+					{issue_image limit="1"}
+					{exp:imgsizer:size src="{image}" quality="80" width="175" server_domain="http://media.seoulistmag.com/" base_path="/home/seoulistmag/media.seoulistmag.com/" base_cache="/home/seoulistmag/media.seoulistmag.com/images/sized/"}
+					{snip_all_permalink_switch_opening}<img src="{sized}" width="{width}" height="{height}" alt="By {image_credit}" /></a>
+					{/exp:imgsizer:size}
+					{/issue_image}
+					
+					{/if}
+					
+					{/if}
+					<div class="article_info">
+						{categories {categories_top_level}}
+						<span class="article_section">{category_name}</span>
+						{/categories}
+						<h3>
+							{snip_all_permalink_switch}
+						</h3>
+						{if {count} > 2}
+						<p>{articles_logline}{columns_logline}{issue_logline}</p>
+						{/if}
+						<div class="additional_meta">
+							<span class="date">{entry_date {snip_date_short}}</span>
+							{snip_disqus_comment-count}
+						</div>
+					</div>
+				</li>
+				{/exp:channel:entries}			
+			</ul>
+		</div>
+<!-- End Home -->
+		{embed="includes/footer"}

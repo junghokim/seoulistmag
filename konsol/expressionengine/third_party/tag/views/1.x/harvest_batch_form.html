@@ -1,0 +1,37 @@
+
+<?php $this->view('header.html');?>
+
+
+<form action="<?php echo $this->base.AMP.'method=process_harvest';?>" method="post">
+	<div class='hidden'>
+		<?php foreach($hidden_fields as $field) : ?>
+			<?php echo $field->output();?>
+		<?php endforeach;?>
+	</div>
+	
+	<div class='clearfix' >&nbsp;</div>
+	
+	<table class='tableBorder'  style='width:100%;'  cellspacing='0'  cellpadding='0'  border='0' >
+	
+		<thead>
+			<tr>
+				<td class="tableHeadingAlt"><?php echo $page_title;?></td>
+			</tr>
+		</thead>
+	
+		<tbody>
+			<tr>
+				<td class="tableCellOne">
+					<p>
+						<input type="submit" name="submit" value="<?php echo str_replace(array('%batch%', '%total%'), array($batch, $total), ee()->lang->line('tag_process_batch_of'));?>" class="submit"  />
+					</p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div class='clearfix' >&nbsp;</div>
+	
+</form>
+	
+<?php echo $this->view('footer.html'); ?>

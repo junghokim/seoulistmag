@@ -1,0 +1,58 @@
+@font-face {
+	font-family: 'SentinelBook';
+	src: url('sentinel-book-webfont.eot');
+	src: local('☺'), url('sentinel-book-webfont.woff') format('woff'), url('sentinel-book-webfont.ttf') format('truetype'), url('sentinel-book-webfont.svg#webfontJCQrsTnT') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	padding: 20px;
+	font-family: 'SentinelBook', Georgia, Times, serif;
+	font-size: 1.25em;
+	color:#280D00;
+	line-height: 125%;
+	text-align: left;
+	background-color: #FFFFFB;
+	font-weight: normal;
+	font-style: normal;
+	line-height:normal;
+	font-size-adjust: .5;
+}
+
+h1 {
+	width: 349px;
+	height: 110px;
+	background-image: url('../seoulist_logo_349px.png');
+	background-repeat: no-repeat;
+	text-indent: -9999px;
+}
+
+h1 + p {
+	margin-top: 40px;
+}
+
+h2 {
+	margin: 30px 0 0 0;
+	letter-spacing: 1px;
+}
+
+a {
+	color: #6bd7ff;
+	text-decoration: none;
+	border-bottom: 1px dotted #280D00;
+}
+
+a:hover {
+	color: #49ceff;
+}
+
+p {
+	margin: 15px 0 10px 0;
+}
+
+#wrapper {
+	margin: 0 auto;
+	padding: 0;
+	max-width: 600px;
+}

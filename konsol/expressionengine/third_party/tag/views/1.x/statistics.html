@@ -1,0 +1,32 @@
+
+<table id="tag_statistics" class="tableBorder" border="0" cellspacing="0" cellpadding="0">
+	
+	<thead>
+		<tr>
+			<td class='tableHeadingAlt' style='width:5%;'><?php echo ee()->lang->line('tags');?></td>
+			<td class='tableHeadingAlt' style='width:15%;'><?php echo ee()->lang->line('total_weblog_entries_tagged');?></td>
+			<td class='tableHeadingAlt' style='width:15%;'><?php echo ee()->lang->line('percent_weblog_entries_tagged');?></td>
+			
+			<?php if ( ee()->db->table_exists('exp_gallery_entries') ) : ?>
+				<td class='tableHeadingAlt' style='width:15%;'><?php echo ee()->lang->line('total_gallery_entries_tagged');?></td>
+				<td class='tableHeadingAlt' style='width:15%;'><?php echo ee()->lang->line('percent_gallery_entries_tagged');?></td>
+			<?php endif;?>
+			
+			<td class='tableHeadingAlt' style='width:25%;'><?php echo ee()->lang->line('top_five_tags');?></td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class='tableCellOne' ><?php echo $total_tags;?></td>
+			<td class='tableCellOne' ><?php echo $total_weblog_entries_tagged;?></td>
+			<td class='tableCellOne' ><?php echo $percent_weblog_entries_tagged;?>&nbsp;%</td>
+			
+			<?php if ( ee()->db->table_exists('exp_gallery_entries') ) : ?>
+				<td class='tableCellOne' ><?php echo $total_gallery_entries_tagged;?></td>
+				<td class='tableCellOne' ><?php echo $percent_gallery_entries_tagged;?>&nbsp;%</td>
+			<?php endif;?>
+			
+			<td class='tableCellOne' ><?php echo implode(', ', $top_five_tags); ?></td>
+		</tr>
+	</tbody>
+</table>

@@ -1,0 +1,48 @@
+<!-- Begin Items of Interest -->
+<div class="section_module">
+	<h2 class="article_section grey"><span class="section_symbol">&sect;</span> Items of Interest</h2>
+	<ul class="articles_list five-small">
+		{exp:channel:entries channel{snip_all_channels}	limit="5" orderby="date" sort="desc" status="Item of Interest" disable="pagination" dynamic="off"}
+		<li class="article">
+			
+			{if channel_id=="1"}
+			{articles_images limit="1"}
+			{exp:imgsizer:size src="{article_image}" width="50" height="50" server_domain="http://media.seoulistmag.com/" base_path="/home/seoulistmag/media.seoulistmag.com/" base_cache="/home/seoulistmag/media.seoulistmag.com/images/sized/"}
+			{snip_all_permalink_switch_opening}<img src="{sized}" width="{width}" height="{height}" alt="By {image_credit}" /></a>
+			{/exp:imgsizer:size}
+			{/articles_images}
+			
+			{if:elseif channel_id=="4"}
+			{articles_images limit="1"}
+			{exp:imgsizer:size src="{article_image}" width="50" height="50" server_domain="http://media.seoulistmag.com/" base_path="/home/seoulistmag/media.seoulistmag.com/" base_cache="/home/seoulistmag/media.seoulistmag.com/images/sized/"}
+			{snip_all_permalink_switch_opening}<img src="{sized}" width="{width}" height="{height}" alt="By {image_credit}" /></a>
+			{/exp:imgsizer:size}
+			{/articles_images}
+			
+			{if:elseif channel_id=="3"}
+			{columns_image limit="1"}
+			{exp:imgsizer:size src="{column_image}" width="50" height="50" server_domain="http://media.seoulistmag.com/" base_path="/home/seoulistmag/media.seoulistmag.com/" base_cache="/home/seoulistmag/media.seoulistmag.com/images/sized/"}
+			{snip_all_permalink_switch_opening}<img src="{sized}" width="{width}" height="{height}" alt="By {image_credit}" /></a>
+			{/exp:imgsizer:size}
+			{/columns_image}
+			
+			{if:elseif channel_id=="2"}
+			{issue_image limit="1"}
+			{exp:imgsizer:size src="{image}" width="50" height="50" server_domain="http://media.seoulistmag.com/" base_path="/home/seoulistmag/media.seoulistmag.com/" base_cache="/home/seoulistmag/media.seoulistmag.com/images/sized/"}
+			{snip_all_permalink_switch_opening}<img src="{sized}" width="{width}" height="{height}" alt="By {image_credit}" /></a>
+			{/exp:imgsizer:size}
+			{/issue_image}
+			
+			{/if}
+			
+			<div class="article_info">
+				{categories show={categories_top_level} limit="1"}
+				<span class="article_section">{category_name}</span>
+				{/categories}
+				<h3>{snip_all_permalink_switch}</h3>
+			</div>
+		</li>
+		{/exp:channel:entries}
+	</ul>
+</div>
+<!-- End Items of Interest -->

@@ -1,0 +1,27 @@
+- MERGE TAGS
+
+Version 2.1.5
+- Small CSS adjustments for SEAF
+
+Version 2.1.2
+- Adjusted the Tagger Model to work with EE 2.1.1 And EE 2.1.3, due to big changes in ExpressionEngine
+
+Version 2.1
+- Added groups="" to {exp:tagger:groups}
+- Added orderby=""/sort=""/tag_orderby=""/tag_sort="" to {exp:tagger:groups}
+
+Version 2.0
+- ExpressionEngine 1.6.x is no longer supported.
+- Added ability to group Tags in the Tagger Module Control Panel
+- Added ability to rename tags
+- Added ability to delete tags
+- Added {exp:tagger:entries} tag
+- Added {exp:tagger:related} tag
+- Renamed tagger_lite_module themes folder to tagger_module
+- Moved tagger theme folder to \themes\third_party\
+
+
+Version 1.1.0
+- Created tags now display in tagger module control panel
+- Tagger (for EE2) now plays nice with other control panel themes
+- Tagger (for EE2) styles updated to have dynamic width

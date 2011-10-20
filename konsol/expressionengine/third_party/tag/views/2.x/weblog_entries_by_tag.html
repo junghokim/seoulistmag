@@ -1,0 +1,61 @@
+
+<?php $this->load->view('header.html');?>
+
+<form >
+
+
+	
+	<table class='mainTable padTable'  style='width:100%;' cellspacing='0'  cellpadding='0'  border='0' >
+		<thead>
+			<tr>
+				<th colspan="4">
+					<?php echo str_replace('%tag_name%', $tag_name, ee()->lang->line('weblog_entries_by_tag_name'));?>
+				</th>
+			</tr>
+			<tr>
+				<th style='width:10%;'><?php echo ee()->lang->line('entry_id');?></td>
+				<th style='width:30%;'><?php echo ee()->lang->line('entry_title');?></td>
+				<th style='width:30%;'><?php echo ee()->lang->line('screen_name');?></td>
+				<th style='width:30%;'><?php echo ee()->lang->line('entry_date');?></td>
+			</tr>
+		</thead>
+		
+		<tbody>
+			
+			<?php if (sizeof($entries) == 0) : ?>
+			
+				<tr>
+					<td class='odd' colspan="4"><?php echo ee()->lang->line('no_entries_found');?></td>
+				</tr>
+			
+			<?php endif; ?>
+		
+		
+			<?php foreach ($entries as $entry_id => $data) : ?>
+				<?php $class = $caller->cycle('odd', 'even');?>
+				<tr class='<?php echo $class;?>'>
+					<td ><?php echo $entry_id;?></td>
+					<td class='<?php echo $class;?>' >
+						<a href='<?php echo BASE;?>&C=content_publish&M=entry_form&channel_id=<?php echo $data['channel_id'];?>&amp;entry_id=<?php echo $entry_id;?>' title="<?php echo $caller->output($data['title']);?>"><?php echo $data['title'];?></a>
+					</td>
+					<td class='<?php echo $class;?>' ><?php echo $data['screen_name'];?></td>
+					<td class='<?php echo $class;?>' ><?php echo ee()->localize->set_human_time($data['entry_date']);?></td>
+				</tr>
+			<?php endforeach;?>
+		</tbody>
+		
+		<?php if ($paginate != '') : ?>
+			<?php $class = $caller->cycle('odd', 'even');?>
+			<tfoot>
+				<tr>
+					<td class="<?php echo $class;?>" colspan="4"><?php echo $paginate;?></td>
+				</tr>
+			</tfoot>
+		<?php endif;?>
+		
+	</table>
+	
+	<div class='clearfix' >&nbsp;</div>
+	
+</form>
+

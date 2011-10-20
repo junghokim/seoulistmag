@@ -1,0 +1,47 @@
+{embed="includes/header"}
+		{embed="includes/masthead"}
+<!-- Begin Issue -->
+	<div id="article" class="section_module">
+		{exp:channel:entries channel="issue" limit="1" status{snip_all_articles} track_views="one" disable="pagination"}
+			{categories}
+			<h2 class="section_title">{category_name}</h2>
+			{/categories}
+			<h2 class="article_title">{title}</h2>
+			<ul id="article_meta">
+				<li class="byline"><span class="byline_prefix">Written by</span> {author}</li>
+				<li class="byline last"><span class="byline_prefix">Posted on</span> {entry_date {snip_date_short}}</li>
+			</ul>
+			<div id="slides" class="column_slideshow">
+			{issue_image limit="1"}
+			{exp:imgsizer:size src="{image}" width="690" server_domain="http://media.seoulistmag.com/" base_path="/home/seoulistmag/media.seoulistmag.com/" base_cache="/home/seoulistmag/media.seoulistmag.com/images/sized/"}
+				<img src="{sized}" width="{width}" height="{height}" alt="{credit}" />
+			<p class="caption">{caption}<span class="photo_credit">{credit}</span></p>
+			{/exp:imgsizer:size}
+			{/issue_image}
+			</div>
+			<div id="below_the_fold">
+				<div id="article_content">
+					<p class="logline">{issue_logline}</p>
+					{issue_body}
+				</div>
+				{embed="includes/sidebar"}
+			</div>
+			<div class="section_module">
+				<div id="author_info" class="section_module">
+					<h2 class="article_section grey">About the author</h2>
+					<img src="{photo_url}" width="80" height="80" alt="{author}" />
+					<p>{bio}</p>
+				</div>
+				<div id="comments">
+					<h3>Join the Conversation</h3>
+					<div id="disqus_container">
+						<div id="disqus_thread"></div>
+						{embed="includes/disqus_thread"}
+					</div>
+				</div>
+			</div>
+		{/exp:channel:entries}
+		{embed="includes/itemsofinterest"}
+		</div>
+<!-- End Issue -->
+		{embed="includes/footer"}

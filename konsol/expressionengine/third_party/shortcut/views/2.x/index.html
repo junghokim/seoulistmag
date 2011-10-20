@@ -1,0 +1,17 @@
+<?php echo $this->view('header.html');?>
+
+<?php if ($message != '') : ?>
+
+	<div class='defaultCenter' >
+		<div class="box">
+			<strong class="menuHeading"><?=$message?></strong>
+		</div>
+	</div>
+
+<?php endif; ?>
+
+	<div class='tableHeading' ><?php echo $page_title;?></div>
+	
+	<p>Main Index Page</p>
+	
+<?php echo $this->view('footer.html'); ?>

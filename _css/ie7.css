@@ -1,0 +1,4 @@
+ul#navigation li.sub-navigation ul li, #slides.article_slideshow ul.carousel_controls li {
+	zoom: 1;
+	*display: inline;
+}

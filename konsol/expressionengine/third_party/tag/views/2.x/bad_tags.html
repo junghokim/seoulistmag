@@ -1,0 +1,59 @@
+
+<?php $this->load->view('header.html');?>
+
+<form action="<?php echo $base_uri;?>&method=bad_tags_process" name='target' id='target' method='post'>
+	<div class='hidden'><input type="hidden" name="XID" value="<?php echo $XID_SECURE_HASH;?>" /></div>
+
+		<table class='mainTable padTable magic_checkbox_table'  style='width:100%;'  cellspacing='0'  cellpadding='0'  border='0' >
+			<thead>
+				<tr>
+					<th style='width:10%;'><input class='toggle_all' type='checkbox' name='toggle_all_checkboxes' value='' />
+					&nbsp;&nbsp;<?php echo ee()->lang->line('tag_remove');?></td>
+					<th style='width:30%;'><?php echo ee()->lang->line('tag_name');?></td>
+					<th style='width:30%;'><?php echo ee()->lang->line('tag_added_by');?></td>
+					<th style='width:30%;'><?php echo ee()->lang->line('edit_date');?></td>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<?php if (sizeof($bad_tags) == 0) : ?>
+					<tr class='odd'>
+						<td colspan="4"><strong><?php echo ee()->lang->line('no_bad_tags_found');?></strong></td>
+					</tr>
+				<?php endif;?>
+			
+				<?php foreach ($bad_tags as $tag_id => $data) : ?>
+					<?php $class = $caller->cycle('odd', 'even');?>
+					<tr class='<?php echo $class;?>' >
+						<td><input class='checkbox toggle' type='checkbox' name='toggle[]' value='<?php echo $tag_id;?>' id='delete_box_<?php echo $tag_id;?>' /></td>
+						<td><?php echo $data['tag_name'];?></a></td>
+						<td><?php echo $data['screen_name'];?></td>
+						<td><?php echo ee()->localize->set_human_time($data['edit_date']);?></td>
+					</tr>
+				<?php endforeach;?>
+			</tbody>
+			
+			<?php if (sizeof($bad_tags) > 0) : ?>
+	
+				<tfoot>
+						<?php $class = $caller->cycle('odd', 'even');?>					
+					<tr class='<?php echo $class;?>' >
+						<td><input class='checkbox toggle_all' type='checkbox' name='toggle_all_checkboxes' value='' />&nbsp;&nbsp;<b><?php echo ee()->lang->line('tag_remove');?></b></td>
+						<td colspan="8">&nbsp;</td>
+					</tr>
+				
+				<?php if ($paginate != '') : ?>
+				<?php $class = $caller->cycle('odd', 'even');?>
+					<tr class="<?php echo $class;?>">
+						<td colspan="9"><?php echo $paginate;?></td>
+					</tr>
+				<?php endif;?>
+			
+				</tfoot>
+			<?php endif; ?>
+			
+		</table>
+		
+		<p><input type='submit' class='submit' name="delete_tag_button" value="<?php echo ee()->lang->line('remove_bad_tags');?>"  /></p>
+</form>
+

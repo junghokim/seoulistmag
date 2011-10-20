@@ -1,0 +1,70 @@
+{preload_replace:master_channel_name{snip_all_channels}}
+{exp:rss:feed channel="{master_channel_name}" status{snip_all_articles}}
+
+<?xml version="1.0" encoding="{encoding}"?>
+<rss version="2.0"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+    xmlns:admin="http://webns.net/mvcb/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:atom="http://www.w3.org/2005/Atom">
+
+    <channel>
+
+	<title>{exp:xml_encode}{site_name}{/exp:xml_encode}</title>
+	<link>{site_url}</link>
+	<description>Seoulist is an English language online magazine curated to feature the best of Seoul affairs, characters and curiosities.</description>
+	<dc:language>{lang}</dc:language>
+	<dc:creator>info@seoulistmag.com</dc:creator>
+	<dc:rights>COPYRIGHT © 2010-{gmt_date format="%Y"} Seoulist Media</dc:rights>
+	<dc:date>{gmt_date format="%Y-%m-%dT%H:%i:%Q"}</dc:date>
+	<admin:generatorAgent rdf:resource="http://expressionengine.com/" />
+        
+	{exp:channel:entries channel="{master_channel_name}" status{snip_all_articles} limit="10" dynamic_start="on" disable="member_data|pagination"}
+	    <item>
+	      <title><![CDATA[{title}]]></title>
+	      <link>
+			{if channel_id=="1"}
+				{title_permalink="articles/read"}
+				{if:elseif channel_id=="3"}
+				{title_permalink="columns/read"}
+				{if:elseif channel_id=="2"}
+				{title_permalink="issue/index"}
+				{if:else}
+			{/if}
+		</link>
+	    <description>
+			<![CDATA[
+			{articles_images limit="1"}
+			{exp:imgsizer:size src="{article_image}" width="690" server_domain="http://media.seoulistmag.com/" base_path="/home/seoulistmag/media.seoulistmag.com/" base_cache="/home/seoulistmag/media.seoulistmag.com/images/sized/"}
+				<img src="{sized}" width="{width}" height="{height}" alt="{image_credit}" />
+			{/exp:imgsizer:size}
+			{/articles_images}
+			
+			{columns_image limit="1"}
+			{exp:imgsizer:size src="{column_image}" width="690" server_domain="http://media.seoulistmag.com/" base_path="/home/seoulistmag/media.seoulistmag.com/" base_cache="/home/seoulistmag/media.seoulistmag.com/images/sized/"}
+				<img src="{sized}" width="{width}" height="{height}" alt="{column_image_credit}" />
+			{/exp:imgsizer:size}
+			{/columns_image}
+			
+			{issue_image limit="1"}
+			{exp:imgsizer:size src="{column_image}" width="690" server_domain="http://media.seoulistmag.com/" base_path="/home/seoulistmag/media.seoulistmag.com/" base_cache="/home/seoulistmag/media.seoulistmag.com/images/sized/"}
+			  <img src="{sized}" width="{width}" height="{height}" alt="{credit}" />
+			{/exp:imgsizer:size}
+			{/issue_image}
+			
+			{articles_logline}{columns_logline}{issue_logline}
+			
+			{articles_body}{columns_body}{issue_body}
+			]]>
+		</description>
+		<dc:creator>{author}</dc:creator>
+		<dc:date>{gmt_date format="%Y-%m-%dT%H:%i:%s%Q"}</dc:date>
+	    </item>
+	{/exp:channel:entries}
+    
+    </channel>
+</rss>
+
+{/exp:rss:feed}

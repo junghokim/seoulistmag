@@ -1,0 +1,91 @@
+
+<?php $this->load->view('header.html');?>
+
+	<form action="<?php echo $base_uri;?>&method=manage_tags_process" name='target' id='target' method='post'>
+		<div class='hidden'><input type="hidden" name="XID" value="<?php echo $XID_SECURE_HASH;?>" /></div>
+		
+		<?php $this->load->view('statistics.html'); ?>
+		
+		<div class='clearfix' >&nbsp;</div>
+		
+		<?php $this->load->view('browse.html'); ?>
+		
+		<div class='clearfix' >&nbsp;</div>
+	
+			<table class='mainTable padTable magic_checkbox_table'  style='width:100%;'  cellspacing='0'  cellpadding='0'  border='0' >
+				<thead>
+					<tr>
+						<th style='width:8%;'>
+							<input type="checkbox" style="float:left;" name="toggle_all_checkboxes" value="true" class="toggle_all" />
+							&nbsp;&nbsp;<?php echo ee()->lang->line('delete');?>
+						</th>
+						<th style='width:6%;'><?php echo str_replace(' ', '&nbsp;', ee()->lang->line('tag_id'));?></th>
+						<th style='width:13%;'><?php echo ee()->lang->line('edit');?></th>
+						<th style='width:12%;'><?php echo ee()->lang->line('tag_entries');?></th>
+						<th style='width:5%;'><?php echo ee()->lang->line('count');?></th>
+						<th style='width:15%;'><?php echo ee()->lang->line('screen_name');?></th>
+						<th style='width:15%;'><?php echo ee()->lang->line('entered_date');?></th>
+						<th style='width:15%;'><?php echo ee()->lang->line('edit_date');?></th>
+						<th style='width:11%;'><?php echo ee()->lang->line('bad_tag');?></th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<?php if (sizeof($tags) == 0) : ?>
+						<tr class='odd' >
+							<td colspan="9"><strong><?php echo ee()->lang->line('no_tags_found');?></strong></td>
+						</tr>
+					<?php endif;?>
+				
+					<?php foreach ($tags as $tag_id => $data) : ?>
+						<?php $class = $caller->cycle('odd', 'even');?>
+						<tr class='<?php echo $class;?>'>
+							<td ><input class='checkbox toggle' type='checkbox' name='toggle[]' value='<?php echo $tag_id;?>' id='delete_box_<?php echo $tag_id;?>' /></td>
+							<td><?php echo $tag_id;?></td>
+							<td><a href='<?php echo $base_uri;?>&method=edit_tag_form&tag_id=<?php echo $tag_id;?>' title="<?php echo ee()->lang->line('edit_tag').' '.$data['tag_name'];?>"><?php echo $data['tag_name'];?></a></td>
+							<td><a href='<?php echo $base_uri;?>&method=weblog_entries_by_tag&tag_id=<?php echo $tag_id;?>' title="<?php echo ee()->lang->line('edit_entries_for_').$data['tag_name'];?>"><?php echo ee()->lang->line('tag_view_entries');?></a></td>
+							<td><?php echo $data['weblog_entries_count'];?></td>
+							<td><?php echo $data['screen_name'];?></td>
+							<td><?php echo ee()->localize->set_human_time($data['entry_date']);?></td>
+							<td><?php echo ee()->localize->set_human_time($data['edit_date']);?></td>
+							
+							<?php if (in_array($data['tag_name'], $bad_tags)) : ?>
+								<td><?php echo ee()->lang->line('bad_tag');?></td>
+							<?php else : ?>
+								<td><a href='<?php echo $base_uri;?>&method=bad_tag&tag_name=<?php echo urlencode(base64_encode($data['tag_name']));?>' title="<?php echo ee()->lang->line('tag_mark_as_bad_').$data['tag_name'];?>"><?php echo str_replace(' ', '&nbsp;', ee()->lang->line('add_bad_tag'));?></a></td>
+							<?php endif;?>
+						</tr>
+					<?php endforeach;?>
+				</tbody>
+				
+				<?php if (sizeof($tags) > 0) : ?>
+		
+					<tfoot><?php $class = $caller->cycle('odd', 'even');?>
+						<tr class='<?php echo $class;?>'>
+							
+							<td><input style="float:left;" class='toggle_all_checkboxes' type='checkbox' name='toggle_all_checkboxes' value='' />&nbsp;<strong><?php echo ee()->lang->line('delete');?></strong></td>
+							<td colspan="8">&nbsp;</td>
+						</tr>
+					
+					<?php if ($paginate != '') : ?>
+					<?php $class = $caller->cycle('odd', 'even');?>
+						<tr class="<?php echo $class;?>" >
+							<td colspan="9"><?php echo $paginate;?></td>
+						</tr>
+					<?php endif;?>
+				
+					</tfoot>
+				<?php endif; ?>
+				
+			</table>
+			
+			
+			
+			<div class='clearfix' >&nbsp;</div>
+			
+			<div class='itemWrapper' >
+				<input type='submit' class='submit' name="delete_tag_button" value="<?php echo ee()->lang->line('delete');?>"  />
+			</div>
+			
+			<div class='clearfix' >&nbsp;</div>
+	</form>

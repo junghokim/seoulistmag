@@ -1,0 +1,32 @@
+
+<table id="tag_statistics" class="mainTable padTable" border="0" cellspacing="0" cellpadding="0">
+	
+	<thead>
+		<tr>
+			<th style='width:5%;'><?php echo ee()->lang->line('tags');?></th>
+			<th style='width:15%;'><?php echo ee()->lang->line('total_weblog_entries_tagged');?></th>
+			<th style='width:15%;'><?php echo ee()->lang->line('percent_weblog_entries_tagged');?></th>
+			
+			<?php if ( ee()->db->table_exists('exp_gallery_entries') ) : ?>
+				<th style='width:15%;'><?php echo ee()->lang->line('total_gallery_entries_tagged');?></th>
+				<th style='width:15%;'><?php echo ee()->lang->line('percent_gallery_entries_tagged');?></th>
+			<?php endif;?>
+			
+			<th style='width:25%;'><?php echo ee()->lang->line('top_five_tags');?></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class='odd' >
+			<td><?php echo $total_tags;?></td>
+			<td class='odd' ><?php echo $total_weblog_entries_tagged;?></td>
+			<td class='odd' ><?php echo $percent_weblog_entries_tagged;?>&nbsp;%</td>
+			
+			<?php if ( ee()->db->table_exists('exp_gallery_entries') ) : ?>
+				<td class='odd' ><?php echo $total_gallery_entries_tagged;?></td>
+				<td class='odd' ><?php echo $percent_gallery_entries_tagged;?>&nbsp;%</td>
+			<?php endif;?>
+			
+			<td class='odd' ><?php echo implode(', ', $top_five_tags); ?></td>
+		</tr>
+	</tbody>
+</table>

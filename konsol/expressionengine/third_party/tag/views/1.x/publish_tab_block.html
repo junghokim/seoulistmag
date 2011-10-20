@@ -1,0 +1,108 @@
+<div id="blocktag" style="display: none; padding:0; margin:0;">
+	<div class="publishTabWrapper">
+		<div class="publishBox">
+			<div class="publishInnerPad">
+			
+<script type="text/javascript">
+
+//<![CDATA[
+
+	// Global variables
+	var delim = '<?php echo ($delimiter == "\n") ? "\\n" : $delimiter;?>';
+	var include_tags = [];
+	
+<?php foreach($existing_tags as $tag) : ?>
+	include_tags.push('<?php echo addslashes($tag);?>');
+<?php endforeach; ?>
+	
+	// jQuery Functions
+	jQuery(document).ready(function($)
+	{
+		jQuery('#tag_browse_f').keyup(function(event)
+		{
+			if (!event) event=window.event;
+		
+			jQuery(this).tag_browser(event, this, "<?php echo $base_uri;?>&method=tag_browse", "6")
+		});
+		
+		jQuery(":checkbox[name*=msm_tag_search]").change(function(event)
+		{ 
+			if (!event) event=window.event;
+		
+			jQuery(this).tag_browser(event, document.getElementById("tag_browse_f"), "<?php echo $base_uri;?>&method=tag_browse", "6")
+		});
+		
+		jQuery('#tag_suggest').click(function(event)
+		{
+			jQuery(this).suggest_tags("<?php echo $base_uri;?>&method=tag_suggest", event)
+		});
+		
+		jQuery("#tag_browse_results").ajaxStart(function()
+		{
+			jQuery(this).notify(this, "<?php echo ee()->config->item('theme_folder_url');?>", "<?php echo ee()->lang->line('searching');?>")
+		});
+		
+		jQuery('#popular_tags_list ul li a').click(function(event)
+		{
+			solspace_add_tag(this, event);
+		});
+		
+	});
+//]]>
+</script>
+			
+			<table id="tag_browse_area" class="clusterBox" cellpadding="0" border="0" cellspacing="0" style="width:99%;">
+				<tr>
+					<td class="publishItemWrapper" width="50%" valign="top">
+						<br />
+						<h5>
+							<?php echo ee()->lang->line('tag_browser');?> <?php echo ee()->lang->line('or');?> 
+							<input type="button" name="tag_suggest" id="tag_suggest" value="Suggest Tags" />
+							
+							<?php if (ee()->config->item('multiple_sites_enabled') == 'y') :?>
+								&nbsp;&nbsp;&nbsp;
+								<input class='checkbox' type='checkbox' name='msm_tag_search' value='y' <?php echo (ee()->input->cookie('msm_tag_search') == 'y') ? "checked='checked'" : '';?>onchange='msmSearchChecked=(this.checked?"y":"n");document.cookie="<?php echo $cookie_prefix;?>msm_tag_search="+msmSearchChecked+";<?php echo $cookie_domain; ?>path=<?php echo $cookie_path;?>;"'  />
+								<?php echo ee()->lang->line('search_all_sites');?>
+							<?php endif; ?>
+						</h5>
+						
+						<div class='defaultSmall' >
+							<?php echo ee()->lang->line('tag_browser_instructions');?>
+						</div>
+						
+						<div class='default' >
+							<input  dir='ltr'  style='width:100%' type='text' name='tag_browse_f' id='tag_browse_f' value='' size='90' maxlength='100' class='input'  />
+						</div>
+						
+						<div id="tag_browse_results"></div>
+						
+						<?php if (sizeof($popular_tags) > 0) : ?>
+							<div id="popular_tags_list">
+								<h5><?php echo ee()->lang->line('popular_tags');?></h5>
+								<div class="defaultSmall"><?php echo ee()->lang->line('popular_tags_instructions');?></div>
+								<ul>
+									<?php foreach($popular_tags as $tag) :?>
+										<li><a href="#"><?php echo $tag['tag_name']; ?></a> (<?php echo $tag['total_entries']; ?>)</li>
+									<?php endforeach;?>
+								</ul>
+								<br style="clear:both;" />
+							</div>
+						<?php endif; ?>
+					</td>
+					<td class="publishItemWrapper" width="50%" valign="top">
+						<br />
+						<h5><?php echo ee()->lang->line('tag_field');?></h5>
+						
+						<div class='defaultSmall'>
+							<?php echo $tag_field_instructions;?>
+						</div>
+						
+						<textarea  dir='ltr'  style='width:100%;' name='tag_f' id='tag_f' cols='90' rows='15' class='textarea' onkeyup="checkTextareaLimit(event);" onkeydown="return tagFieldCaptureDelete(event);" onkeypress="return tagFieldCaptureDelete();"><?php echo implode($delimiter, $existing_tags);?></textarea>
+					</td>
+				</tr>
+			</table>
+			</div>
+		</div>	
+	</div>
+
+</div>

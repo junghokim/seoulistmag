@@ -1,0 +1,36 @@
+<?php echo $this->view('header.html'); ?>
+
+		<form method="post" id="prefs_form" action="<?php echo $this->output($base_uri.'&method=preferences');?>">
+
+		<table class="tableBorder" style="width:100%;" cellspacing="0" cellpadding="0" border="0">
+			<thead>
+				<tr>
+					<td class="tableHeadingAlt" colspan="2"><?=ee()->lang->line('preferences_exp'); ?></td>
+				</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td class="tableCellOne" style="width:50%;"><label for="shortcut_prefix"><b><?=ee()->lang->line('shortcut_prefix'); ?></b></label>
+                <div class="subtext"><?=ee()->lang->line('shortcut_prefix_exp'); ?></div></td>
+				<td class="tableCellOne" style="width:50%;">
+					<input name="shortcut_prefix" id="shortcut_prefix" value="<?=$prefs['shortcut_prefix']; ?>" style="width:50px;" />
+				</td>
+			</tr>
+			<!-- Shortcut prefix -->
+			<tr>
+				<td class="tableCellOne" style="width:50%;"><label for="shortcut_base"><b><?=ee()->lang->line('shortcut_base'); ?></b></label>
+                <div class="subtext"><?=ee()->lang->line('shortcut_base_exp'); ?></div></td>
+				<td class="tableCellOne" style="width:50%;">
+					<input name="shortcut_base" value="<?=$prefs['shortcut_base']; ?>" style="width:100%;" />
+				</td>
+			</tr>
+			<!-- Shortcut base -->
+			</tbody>
+		</table>
+		<div class='clearfix' >&nbsp;</div>
+		<div class='itemWrapper'>
+			<input type="submit" value="<?=ee()->lang->line('submit'); ?>" />
+		</div>
+		</form>
+	
+<?php echo $this->view('footer.html'); ?>

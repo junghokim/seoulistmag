@@ -1,0 +1,55 @@
+<!--Begin Masthead -->
+<body>
+{embed="advertising/tracking_code"}
+<div id="masthead_container">
+	<div id="masthead">
+		<h1>
+			<a href="{path=site_index}">Seoulist</a>
+		</h1>
+		<div id="search-bar">
+	        <div class="search-bar_left"></div> 
+			{exp:search:simple_form channel="articles|columns" search_in="everywhere" result_page="search/index"}
+				<input type="text" name="keywords" id="search_space" value="" />
+				<input type="submit" value="Search" class="submit" />
+			{/exp:search:simple_form}
+	        <div class="search-bar_right"></div> 
+		</div>
+	</div>
+</div>
+<div id="wrapper">
+	<div id="site_content">
+		<div id="navigation_wrapper">
+			<ul id="navigation">
+				<li class="sub-navigation"><a href="{path="section/browse/the_city"}">The City &raquo;</a>
+					<ul>
+						<li><a href="{path="section/browse/places/"}">Places</a></li>
+						<li><a href="{path="section/browse/scenes/"}">Scenes</a></li>
+						<li><a class="last" href="{path="section/browse/vignettes/"}">Vignettes</a></li>
+					</ul>
+				</li>
+				<li class="sub-navigation"><a href="{path="section/browse/the_people"}">The People</a></li>
+				<li class="sub-navigation"><a href="{path="section/browse/life_and_style"}">Life &#43; Style &raquo;</a>
+					<ul>
+						<li><a href="{path="section/browse/spaces/"}">Spaces</a></li>
+						<li><a class="last" href="{path="section/browse/things/"}">Things</a></li>
+					</ul>
+				</li>
+				<li class="sub-navigation"><a href="{path="section/browse/food_and_drink/"}">Food &#43; Drink &raquo;</a>
+					<ul>
+						<li><a href="{path="section/browse/restaurants/"}">Restaurants</a></li>
+						<li><a href="{path="section/browse/cafe/"}">Cafe</a></li>
+						<li><a class="last" href="{path="section/browse/the_local_kitchen/"}">The Local Kitchen</a></li>
+					</ul>
+				</li>
+				<li class="sub-navigation"><a href="{path="section/browse/art_and_culture/"}">Art &#43; Culture</a></li>
+				<li><a href="{path="section/browse/excursions/"}">Excursions</a></li>
+				<li class="sub-navigation"><a href="{path="columns/browse/"}">Columns &raquo;</a>
+					<ul>
+						<li><a href="{path="columns/browse/the_jolly_box/"}">The Jolly Box</a></li>
+						<li><a href="{path="columns/browse/dear_engineer/"}">Dear Engineer</a></li>
+						<li><a class="last" href="{path="columns/browse/seoulista_diaries/"}">Seoulista Diaries</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+<!-- End Masthead -->

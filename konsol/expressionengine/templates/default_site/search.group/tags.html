@@ -1,0 +1,48 @@
+{embed="includes/header"}
+		{embed="includes/masthead"}
+<!-- Begin Search Results -->
+	<div id="search" class="section_module">
+		<h2 class="section_title">You searched for &ldquo;{segment_3}&rdquo;, we found...</h2>
+		<ul id="search_results">
+			{exp:tagger:entries tag="{segment_3}" channel{snip_all_channels} status{snip_all_articles} custom_fields="logline|articles_body|columns|body|issue_body|author"}
+			{if tagger:no_entries}
+				<li>
+					<div id="error_container">
+			            <div class="error_content">
+			                We're sorry, we weren't able to find anything tagged "{segment_3}".
+						</div>
+						<p><a href="{site_path}">Back to SeoulistMag.com</a></p>
+					</div>
+				</li>
+			{/if}
+			<li>{if channel_id=="1"}
+				<p><a href="/articles/read/{tagger:entry_url_title}">Read More</a></p>
+				{if:elseif channel_id=="4"}
+				<p><a href="/columns/read/{tagger:entry_url_title}">Read More</a></p>
+				{if:elseif channel_id=="3"}
+				<p><a href="/guides/read/{tagger:entry_url_title}">Read More</a></p>
+				{if:elseif channel_id=="2"}
+				<p><a href="/issue/index/{tagger:entry_url_title}">Read More</a></p>
+			    {/if}
+				<h3>
+					{snip_all_permalink_switch_opening}{tagger:entry_title}</a>
+				</h3>
+				{exp:eehive_hacksaw words="30" allow="<p></p><b><a>" append="..."}
+				{tagger:articles_body}
+				{tagger:columns_body}
+				{tagger:issue_body}
+				{/exp:eehive_hacksaw}
+				</p>
+				<ul id="article_meta">
+					<li class="first"><span class="byline_prefix">Written by</span> {tagger:author}</li>
+					<li><span class="byline_prefix">Posted on</span> {entry_date {snip_date_short}}</li>
+					<li class="section">{categories {categories_top_level}}{category_name}{/categories}</li>
+				</ul>
+			</li>
+			{/exp:tagger:entries}
+		</ul>
+		{embed="includes/sidebar-search"}
+	{embed="includes/itemsofinterest"}
+	</div>
+<!-- End Search Results -->
+	{embed="includes/footer"}

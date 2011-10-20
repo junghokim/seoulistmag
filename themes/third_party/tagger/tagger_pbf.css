@@ -1,0 +1,37 @@
+.clear:after {content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clear {display: inline-block;}
+/* Hides from IE-mac \*/
+* html .clear {height: 1%;}
+.clear {display: block;}
+/* End hide from IE-mac */
+
+#TaggerBox {width:auto; padding:5px; margin:0 20px;}
+#TaggerBox .LeftSection {width:50%; float:left;}
+#TaggerBox .LeftSection .sBox {width:49%; float:left;}
+#TaggerBox .RightSection {width:49%; float:left; margin:0 0 0 1%;}
+
+#TaggerBox .TagBox {margin:0 0.5% 0 0; border:1px solid #2D383E}
+#TaggerBox .TagBox .Head {background:#3A4850; padding:5px; color:#fff; font-weight:bold; border:1px solid #505F66}
+#TaggerBox .TagBox .Head span {font-weight:normal; font-size:10px;}
+#TaggerBox .TagBox .Content {padding:10px;}
+#TaggerBox .TagBox .Content input[type="text"] {width:90%;}
+#TaggerBox .LeftSection .AssignedTags {margin:10px 0 0 0;} 
+
+#TaggerBox .AssignedTags {padding-bottom:5px !important;}
+#TaggerBox .AssignedTags .tag {background:url(tag_bg.gif); border:1px solid #D9D9D9; float:left; margin:0 10px 5px 0; padding:2px;}
+#TaggerBox .AssignedTags .tag div {padding:5px 25px 5px 5px; font-weight:bold; position:relative;}
+#TaggerBox .AssignedTags .tag div a {display:block; right:3px; top:3px; width:16px; height:16px; background:url(tag_minus.png) no-repeat; position:absolute;}
+#TaggerBox .MostUsedTags .tag {margin:0 10px 5px 0; padding:0 0 0 20px; height:16px; display:block; background:url(tag.png) no-repeat; float:left; text-decoration:none}
+
+#TaggerBox .TextInput {width:230px; border:1px solid #ccc; padding:2px;}
+
+
+/* AutoComplete */
+.ac_results {padding: 0px; border: 1px solid black;	background-color: white; overflow: hidden; z-index: 99999;}
+.ac_results ul {width: 100%; list-style-position: outside; list-style: none; padding: 0; margin: 0;}
+.ac_results li {margin: 0px; padding: 2px 5px; cursor: default;	display: block;	font: menu;	font-size: 12px; line-height: 16px;	overflow: hidden; position:relative;}
+.ac_results li.ac_odd {background-color: #eee;}
+.ac_results li.ac_over {background-color: #74CFC5; color: white;}
+.ac_loading { background: white url('spinnerblack.gif') right center no-repeat;}
+
+.tags_autocomplete li {padding:3px 5px 2px 25px; background:url(tag_plus.png) no-repeat 2px 2px;}

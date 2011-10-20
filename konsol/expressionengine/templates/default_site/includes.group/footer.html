@@ -1,0 +1,65 @@
+<!-- Begin Footer Template -->
+		{embed="advertising/leaderboard"}
+		<ul id="promotions" class="section_module">
+			<li class="promotion">
+				<span class="promotion_label">A Project by</span>
+				<img class="no_radius" src="http://media.seoulistmag.com/partnerships/seoulist_media_logo.png" width="88" height="30" alt="Seoulist Media Logo" />
+			</li>
+			<li class="promotion">
+				<span class="promotion_label">Advertise with us</span>
+				<a href="{path="/advertising/"}">
+				<img class="no_radius" src="http://media.seoulistmag.com/partnerships/seoulist_small-banner.png" width="88" height="30" alt="Advertise with us" />
+				</a>
+			</li>
+			<li class="promotion double">
+				<span class="promotion_label">Join our Mailing List</span>
+				<div id="newsletter_signup">
+					{exp:mailinglist:form list="newsletter"}
+					<input type="text" name="email" id="newsletter_form" value="{email}" />
+					<input type="submit" class="submit_newsletter" value="Sign Up" />
+					{/exp:mailinglist:form}
+				</div>
+			</li>
+			<li class="social_media">
+				<ul>
+					<li class="fb"><a href="http://www.facebook.com/seoulist"><span class="promotion_label">Join us on<br />Facebook</span></a></li>
+					<li class="twitter"><a href="http://twitter.com/#!/seoulistmag"><span class="promotion_label">Follow us<br />@SeoulistMag</span></a></li>
+				</ul>
+			</li>
+		</ul>
+		<div id="footer" class="section_module">
+			<ul class="utility_nav">
+				<li class="first">
+					<a href="{path=about}">About Us</a>
+				</li>
+				<li>
+					<a href="{path=contact}">Contact</a>
+				</li>
+				<li>
+					<a href="{path=contribute}">Contribute</a>
+				</li>
+				<li>
+					<a href="{path=advertising}">Advertising</a>
+				</li>
+				<li class="copyright">
+					Copyright © 2010-<?php ini_set('date.timezone', 'America/Los_Angeles'); $thisYear = date('Y'); echo $thisYear ?> Seoulist Media
+				</li>
+			</ul>
+			<span class="site_credit">Site by <a href="http://abstractfutures.com/">Abstract•Futures</a></span>
+			<a class="rss" href="http://feeds.feedburner.com/seoulistmag">RSS</a>
+		</div>
+	</div>
+</div>
+{embed="includes/disqus_comment-count"}
+<script type=”text/javascript”>Cufon.now();</script>
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+var sc_project=6759359; 
+var sc_invisible=1; 
+var sc_security="6a0b69a5"; 
+</script>
+<script type="text/javascript"
+src="http://www.statcounter.com/counter/counter.js"></script>
+<!-- End of StatCounter Code -->
+</body>
+</html>

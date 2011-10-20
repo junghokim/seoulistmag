@@ -1,0 +1,58 @@
+
+
+<table id="browse_tags" class="mainTable padTable" border="0" cellspacing="0" cellpadding="0">
+	<thead>
+		<tr>
+			<th  style="width: 50%; text-align:left;">
+				<?php echo ee()->lang->line('browse_tags');?>
+			</th>
+			<th style="text-align:right; border-left:none;">
+				<input type="text" size="20" style="width:50%;" id="tag_search_keywords" name="tag_search_keywords" 
+					   class="tag_search_keywords" value="<?php echo $caller->output(ee()->input->post('tag_search_keywords'));?>" />
+				<input name="tag_search_button" type="submit" value="Go!" class="submit" />
+				<script type="text/javascript">
+					jQuery(function($){
+						var searchText = '<?=$lang_search_tags?>';
+						var $searchBox = $('#tag_search_keywords');
+						$searchBox.focus(function(){
+							if ($searchBox.val() == searchText)
+							{
+								$searchBox.val('');
+							}
+						}).blur(function(){
+							if ($searchBox.val() == '')
+							{
+								$searchBox.val(searchText);
+							}						
+						}).blur();
+					});
+				</script>
+			</th>
+		</tr>
+	</thead>
+		
+	<tbody>
+		<?php if (count($tags_by_alpha) == 0) : ?>
+			<tr class='odd' >
+				<td colspan="2"><?php echo ee()->lang->line('no_tags_found');?></td>
+			</tr>
+		<?php else :?>
+			<tr class='odd'>
+				<td colspan="2" style="padding:0;">
+								<div style="border-right:1px solid #D0D7DF; border-bottom:1px solid #D0D7DF; padding:8px; float:left;  margin-bottom:-1px;">
+									<a href='<?php echo $base_uri;?>'><strong>(<?=$lang_all_tags?>)</strong>&nbsp;(<?php echo $total_tags;?>)</a>
+								</div>
+							<?php foreach($tags_by_alpha as $letter => $count) : ?>
+								<div style="border-right:1px solid #D0D7DF; border-bottom:1px solid #D0D7DF; padding:8px; float:left; margin-bottom:-1px;">
+									<a 	href='<?php echo $base_uri;?>&alpha=<?php echo $letter;?>' 
+								   		title="<?php echo ee()->lang->line('browse_tags_by').' '.$letter;?>">
+								   <strong><?php echo strtoupper($letter);?></strong>&nbsp;(<?php echo $count;?>)
+									</a>
+								</div>
+							<?php endforeach; ?>
+					<div style="clear:both;"></div>
+				</td>
+			</tr>
+		<?php endif; ?>
+	</tbody>
+</table>

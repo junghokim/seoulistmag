@@ -1,0 +1,70 @@
+
+<?php $this->view('header.html');?>
+
+<form action="<?php echo $this->base;?>&method=bad_tags_process" name='target' id='target' method='post'>
+	<div class='hidden'><input type="hidden" name="XID" value="{XID_SECURE_HASH}" /></div>
+
+	<div class='tableHeading' ><?php echo ee()->lang->line('bad_tags');?></div>
+
+		<table class='tableBorder magic_checkbox_table'  style='width:100%;'  cellspacing='0'  cellpadding='0'  border='0' >
+			<thead>
+				<tr>
+					<td class='tableHeadingAlt' style='width:10%;'><input class='checkbox' type='checkbox' name='toggle_all_checkboxes' value='' />
+					&nbsp;&nbsp;<?php echo ee()->lang->line('tag_remove');?></td>
+					<td class='tableHeadingAlt' style='width:30%;'><?php echo ee()->lang->line('tag_name');?></td>
+					<td class='tableHeadingAlt' style='width:30%;'><?php echo ee()->lang->line('tag_added_by');?></td>
+					<td class='tableHeadingAlt' style='width:30%;'><?php echo ee()->lang->line('edit_date');?></td>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<?php if (sizeof($bad_tags) == 0) : ?>
+					<tr>
+						<td class='tableCellOne' colspan="4"><strong><?php echo ee()->lang->line('no_bad_tags_found');?></strong></td>
+					</tr>
+				<?php endif;?>
+			
+				<?php foreach ($bad_tags as $tag_id => $data) : ?>
+					<?php $class = $this->cycle('tableCellOne', 'tableCellTwo');?>
+					<tr>
+						<td class='<?php echo $class;?>' ><input class='checkbox' type='checkbox' name='toggle[]' value='<?php echo $tag_id;?>' id='delete_box_<?php echo $tag_id;?>' /></td>
+						<td class='<?php echo $class;?>' ><?php echo $data['tag_name'];?></a></td>
+						<td class='<?php echo $class;?>' ><?php echo $data['screen_name'];?></td>
+						<td class='<?php echo $class;?>' ><?php echo ee()->localize->set_human_time($data['edit_date']);?></td>
+					</tr>
+				<?php endforeach;?>
+			</tbody>
+			
+			<?php if (sizeof($bad_tags) > 0) : ?>
+	
+				<tfoot>
+					<tr>
+						<?php $class = $this->cycle('tableCellOne', 'tableCellTwo');?>
+						<td class='<?php echo $class;?>' ><input class='checkbox' type='checkbox' name='toggle_all_checkboxes' value='' />&nbsp;&nbsp;<b><?php echo ee()->lang->line('tag_remove');?></b></td>
+						<td class='<?php echo $class;?>' colspan="8">&nbsp;</td>
+					</tr>
+				
+				<?php if ($paginate != '') : ?>
+				<?php $class = $this->cycle('tableCellOne', 'tableCellTwo');?>
+					<tr>
+						<td class="<?php echo $class;?>" colspan="9"><?php echo $paginate;?></td>
+					</tr>
+				<?php endif;?>
+			
+				</tfoot>
+			<?php endif; ?>
+			
+		</table>
+		
+		
+		
+		<div class='clearfix' >&nbsp;</div>
+		
+		<div class='itemWrapper' >
+			<input type='submit' class='submit' name="delete_tag_button" value="<?php echo ee()->lang->line('remove_bad_tags');?>"  />
+		</div>
+		
+		<div class='clearfix' >&nbsp;</div>
+</form>
+
+<?php $this->view('footer.html');?>

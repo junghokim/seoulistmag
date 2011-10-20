@@ -1,0 +1,15 @@
+{embed="includes/header"}
+		{embed="includes/masthead"}
+<!-- Begin Static Content -->
+	<div id="static" class="section_module">
+		{exp:channel:entries channel="static" limit="1" disable="pagination"}
+		<h2 class="section_title">{title}</h2>
+		<div id="article_content">
+			{page_text}
+		</div>
+		{/exp:channel:entries}
+		{embed="includes/sidebar-search"}
+	{embed="includes/itemsofinterest"}
+	</div>
+<!-- End Static Content -->
+	{embed="includes/footer"}

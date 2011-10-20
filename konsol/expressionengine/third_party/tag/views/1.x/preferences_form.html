@@ -1,0 +1,231 @@
+
+<?php $this->view('header.html');?>
+
+
+	<script type="text/javascript"> 
+	<!--
+		
+	function switchSite(site_id, form_id)
+	{
+		document.getElementById('site_loader').style.display = 'inline';
+		
+		// The loader image is given a second to be seen before we switch
+		// Origins of image: http://www.ajaxload.info/
+		setTimeout('switchSite_action(' + site_id + ', "' + form_id + '")', 350);
+	}
+	
+	function switchSite_action(site_id, form_id)
+	{		
+		jQuery("div[id*=_module_site_preferences]").hide();
+		jQuery("div[id*=_module_site_channels]").hide();
+		
+		// Adding this makes for a cleaner transition between Sites
+		jQuery("div[id*=_module_channel_preferences]").hide();
+		
+		jQuery("div[id="+site_id+"_module_site_preferences]").show();
+		jQuery("div[id="+site_id+"_module_site_channels]").show();
+		
+		document.getElementById('site_loader').style.display = 'none';
+		
+		if (jQuery("select[name="+site_id+"_channel_list_pulldown] option").length == 0)
+		{
+			switchWeblog('none', site_id, form_id);
+		}
+		else
+		{
+			switchWeblog(jQuery("select[name="+site_id+"_channel_list_pulldown]").val(), site_id, form_id);
+		}
+	}
+	
+	function switchWeblog(channel_id, site_id, form_id)
+	{
+		document.getElementById(site_id + '_channel_loader').style.display = 'inline';
+		
+		// The loader image is given a second to be seen before we switch
+		// Origins of image: http://www.ajaxload.info/
+		setTimeout('switchWeblog_action("' + channel_id + '",' + site_id + ', "' + form_id + '")', 350);
+	}
+	
+	function switchWeblog_action(channel_id, site_id, form_id)
+	{		
+		jQuery("div[id*=_module_channel_preferences]").hide();
+		jQuery("div[id="+channel_id+"_module_channel_preferences]").show();
+		
+		document.getElementById(site_id + '_channel_loader').style.display = 'none';
+		
+		if (channel_id == 'none')
+		{
+			jQuery("#none_channels_extension_field_settings").show();
+			return;
+		}
+	}
+	
+	
+	//-->
+	</script>
+
+
+<form action="<?php echo $this->base.AMP.'method=update_preferences';?>" method="post" id="tag_preferences_form">
+	<input type="hidden" name="XID" value="{XID_SECURE_HASH}" />
+	
+	<div class='tableHeading' ><?php echo ee()->lang->line('tag_preferences'); ?></div>
+	
+	<!-- START Tag Preferences -->
+		
+	<table border='0'  cellspacing='0' cellpadding='0' style='width:100%;'  class='tableBorder' >
+	
+		<tbody>
+			<tr>
+				<td valign='top' style='width:220px;' class="tableCellOne">
+					<div class="divBorder" style="margin:0;">
+						
+						<?php if (ee()->config->item('multiple_sites_enabled') == 'y') : ?>
+							<div class='tableHeadingAlt' ><?php echo ee()->lang->line('site_switcher');?></div>
+							<div class='profileMenuInner' >
+								<select name="site_list_pulldown" class="select" onchange="switchSite(this.value, 'tag_preferences_form')">
+									<?php foreach($this->output($sites) as $site_id => $site_label) : ?>
+										<option value='<?php echo $site_id;?>' <?php echo ($site_id == ee()->config->item('site_id')) ? 'selected="selected"' : '';?>><?php echo $site_label; ?></option>
+									<?php endforeach; ?>
+								</select>
+								<span id="site_loader" style="display:none;"><img src="<?php echo PATH_CP_IMG;?>loader.gif" width="16" height="16" style="vertical-align:sub;" /></span>
+							</div>	
+						<?php else :?>							
+							<div class='tableHeadingAlt' ><?php echo ee()->lang->line('weblog_switcher');?></div>
+						<?php endif; ?>
+						
+						<?php foreach($this->output($sites) as $site_id => $site_label) : ?>
+						<div class='profileMenuInner' id="<?php echo $site_id;?>_module_site_channels" style="display: <?php echo ($site_id == ee()->config->item('site_id')) ? 'block' : 'none';?>;">
+							<select name="<?php echo $site_id;?>_channel_list_pulldown" class="select" onchange="switchWeblog(this.value, '<?php echo $site_id;?>', 'tag_preferences_form')">
+								<?php foreach($this->output($channels[$site_id]) as $channel_id => $channel_title) : ?>
+									<option value='<?php echo $channel_id;?>' <?php echo ($channel_id == $default_channel) ? 'selected="selected"' : '';?>><?php echo $channel_title; ?></option>
+								<?php endforeach; ?>
+							</select>
+							<span id="<?php echo $site_id;?>_channel_loader" style="display:none;"><img src="<?php echo PATH_CP_IMG;?>loader.gif" width="16" height="16" style="vertical-align:sub;" /></span>
+						</div>	
+						<?php endforeach; ?>
+					</div>
+					
+				</td>
+				
+				<td class="default tableCellOne" style='width:8px;'></td>
+				
+				<td valign='top' class="tableCellOne">
+				
+<?php foreach($this->output($sites) as $site_id => $site_label) : ?>
+
+						<!-- START Site Tag Preferences -->
+					<div id="<?php echo $site_id;?>_module_site_preferences" style="display: <?php echo ($site_id == ee()->config->item('site_id')) ? 'block' : 'none';?>; padding:0; margin: 0 0 15px 0;" class="divBorder">
+				
+						<table class='tableBorder' border='0'  cellspacing='0' cellpadding='0' style='width:100%;'>
+							
+							<thead>
+								<tr>
+									<td colspan="2" class="tableHeadingAlt">
+										<?php echo ee()->lang->line('site_preferences'); ?> :: <?php echo $site_label;?>
+									</td>
+								</tr>
+							</thead>
+							
+							<tbody>
+								<?php foreach($form_fields[$site_id] as $field_name => $field) : ?>
+									<?php $align = ($field->element == 'textarea' OR isset($field->attributes['multiple'])) ? 'top' : 'center'; ?>
+				
+									<?php $style = $this->cycle('tableCellOne', 'tableCellTwo'); ?>
+									<tr>
+										<td valign="<?php echo $align;?>" style="width: 35%;" class="<?php echo $style;?>Bold">
+											<label for="<?php echo $field_name;?>"><?php echo ee()->lang->line($field_name);?></label>
+											
+											<?php if (ee()->lang->line($field_name.'_subtext') != $field_name.'_subtext') : ?>
+												<div class="subtext"><?php echo ee()->lang->line($field_name.'_subtext');?></div>
+											<?php endif; ?>
+											
+										</td>
+										<td valign="<?php echo $align;?>" style="width: 65%;" class="<?php echo $style;?>Bold">
+											<?php if (is_array($field)) : ?>
+												<?php foreach($field as $subfield_name => $subfield) : ?>
+													<p>
+														<?php echo $subfield->output(); ?> &nbsp; 
+														<label for="<?php echo $field_name.'_'.$subfield_name;?>"><?php echo ee()->lang->line($subfield_name);?></label>
+													</p>
+												<?php endforeach;?>
+											<?php else: ?>
+												<?php echo $field->output(); ?>
+											<?php endif;?>
+										</td>
+									</tr>
+								<?php endforeach; ?>
+							</tbody>
+						</table>
+						
+						<div class='clearfix' >&nbsp;</div>
+					</div>
+					<!-- END Site Tag Preferences -->
+
+
+	<?php foreach($this->output($channels[$site_id]) as $channel_id => $channel_title) : ?>
+						<div id="<?php echo $channel_id;?>_module_channel_preferences" style="display: <?php echo ($channel_id == $default_channel) ? 'block' : 'none';?>; padding:0; margin: 0 0 15px 0;" class="divBorder">
+							<table class='tableBorder' border='0' cellspacing='0' cellpadding='0' style='width:100%;'>
+								<tr>
+									<td class='tableHeadingAlt' colspan='2'><?php echo ee()->lang->line((APP_VER < 2.0) ? 'weblog_preferences' : 'channel_preferences');?> :: <?php echo $channel_title; ?></td>
+								</tr>
+								
+								
+								<?php 
+								foreach($channel_form_fields[$channel_id] as $field_id => $field) :
+								
+									$switch = $this->cycle('tableCellOne', 'tableCellTwo');
+									$valign = ($field->getAttribute('multiple') != NULL) ? 'top' : 'center';
+									
+								?>
+								<tr>
+									<td class='<?php echo $switch;?>Bold' valign='<?php echo $valign;?>' style='width:35%;'>
+										<label for="<?php echo $field->getAttribute('id');?>"><?php echo ee()->lang->line($field_id);?></label>
+										<?php if (isset(ee()->lang->language[$field_id.'_subtext'])) :?>
+											<div class="subtext">
+												<?php echo ee()->lang->line($field_id.'_subtext');?>
+											</div>
+										<?php endif;?>
+									</td>
+								
+									<td class='<?php echo $switch;?>'>
+										<?php echo $field->output(); ?>
+									</td>
+								</tr>
+								<?php endforeach; ?>
+								
+								
+							</table>
+						</div>
+	<?php endforeach; ?>	
+<?php endforeach; ?>
+				
+				
+					<!-- In case a Site has no Weblogs -->
+					
+					<div id="none_module_channel_preferences" style="display: none; padding:0; margin: 0;" class="divBorder">
+						<table border='0'  cellspacing='0' cellpadding='0' style='width:100%;'>
+							<tr>
+								<td class='tableHeadingAlt'>---</td>
+							</tr>
+							<tr>
+								<td class="tableCellTwo"><?php echo ee()->lang->line('no_weblogs_for_site');?></td>
+							</tr>
+						</table>
+					</div>					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<!-- END Tag Preferences -->
+	
+	<div class='clearfix' >&nbsp;</div>
+
+	<div class='itemWrapper'>
+		<input type="submit" name="submit" value="<?php echo ee()->lang->line('update');?>" class="submit"  />
+	</div>
+
+</form>
+
+
+<?php $this->view('footer.html');?>

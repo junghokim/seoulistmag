@@ -1,0 +1,90 @@
+#tag_browse_results {
+  padding:0;
+  margin: 8px 0 0 0;
+  width:100%;
+  background:#fff;
+  max-height:125px;
+  overflow: auto;
+}
+
+#tag_browse_results ul,
+#tag_browse_results ul li {
+  list-style:none;
+  margin:0;
+  padding:0;
+  float:left;
+}
+
+#tag_browse_results ul li {
+  display:inline;
+  color: #ccc;
+  line-height: 22px;
+  margin: 0 5px 0 0;
+}
+
+#tag_browse_results a {
+  background:#eee;
+  height: 12px;
+  padding: 5px 0px 5px 23px;
+}
+
+#tag_browse_results a {
+  background: transparent url(<?php echo ee()->config->item('theme_folder_url');?>solspace_themes/cp_global_images/tag.gif) no-repeat 5px 50%;
+}
+
+div.message, div.notify
+{
+	border: 1px solid #aaa;
+	padding: 6px 0 5px 30px;
+}
+
+div.message {background: #eee url(<?php echo ee()->config->item('theme_folder_url');?>solspace_themes/cp_global_images/error.gif) no-repeat 5px 50%; }
+div.notify { background: #eee url(<?php echo ee()->config->item('theme_folder_url');?>solspace_themes/cp_global_images/spinner.gif) no-repeat 5px 50%; }
+#tag_browse_results a:hover,
+#tag_browse_results a:focus,
+#tag_browse_results a:active { background: #fff url(<?php echo ee()->config->item('theme_folder_url');?>solspace_themes/cp_global_images/tag.gif) no-repeat 5px 50%; }
+
+
+#popular_tags_list {
+  padding: 10px 0 0 0;
+  margin: 7px 0 0 0;
+  width:100%;
+  background:#fff;
+  max-height:125px;
+  overflow: auto;
+  border-top: 1px solid #ccc;
+}
+
+#popular_tags_list ul,
+#popular_tags_list ul li {
+  list-style:none;
+  margin:0;
+  padding:0;
+  float:left;
+}
+
+#popular_tags_list ul
+{
+	margin-top: 3px;
+}
+
+#popular_tags_list ul li {
+  display:inline;
+  color: #ccc;
+  line-height: 22px;
+  margin: 0 5px 0 0;
+}
+
+#popular_tags_list a {
+  background:#eee;
+  height: 12px;
+  padding: 5px 0px 5px 23px;
+}
+
+#popular_tags_list a {
+  background: transparent url(<?php echo ee()->config->item('theme_folder_url');?>solspace_themes/cp_global_images/tag.gif) no-repeat 5px 50%;
+}
+
+#popular_tags_list a:hover,
+#popular_tags_list a:focus,
+#popular_tags_list a:active { background:#fff url(<?php echo ee()->config->item('theme_folder_url');?>solspace_themes/cp_global_images/tag.gif) no-repeat 5px 50%; color: #444; text-decoration:underline;}

@@ -1,0 +1,98 @@
+
+<?php $this->view('header.html');?>
+
+<form action="<?php echo $this->base;?>&method=manage_tags_process" name='target' id='target' method='post'>
+	<div class='hidden'><input type="hidden" name="XID" value="{XID_SECURE_HASH}" /></div>
+
+	<div class='tableHeading' ><?php echo ee()->lang->line('manage_tags');?></div>
+	
+	<?php $this->view('statistics.html'); ?>
+	
+	<div class='clearfix' >&nbsp;</div>
+	
+	<?php $this->view('browse.html'); ?>
+	
+	<div class='clearfix' >&nbsp;</div>
+
+		<table class='tableBorder magic_checkbox_table'  style='width:100%;'  cellspacing='0'  cellpadding='0'  border='0' >
+			<thead>
+				<tr>
+					<td class='tableHeadingAlt' style='width:10%;'>
+						<input class='checkbox' type='checkbox' name='toggle_all_checkboxes' value='' />
+						&nbsp;&nbsp;<?php echo ee()->lang->line('delete');?>
+					</td>
+					<td class='tableHeadingAlt' style='width:5%;'><?php echo ee()->lang->line('tag_id');?></td>
+					<td class='tableHeadingAlt' style='width:13%;'><?php echo ee()->lang->line('edit');?></td>
+					<td class='tableHeadingAlt' style='width:12%;'><?php echo ee()->lang->line('tag_entries');?></td>
+					<td class='tableHeadingAlt' style='width:5%;'><?php echo ee()->lang->line('count');?></td>
+					<td class='tableHeadingAlt' style='width:15%;'><?php echo ee()->lang->line('screen_name');?></td>
+					<td class='tableHeadingAlt' style='width:15%;'><?php echo ee()->lang->line('entry_date');?></td>
+					<td class='tableHeadingAlt' style='width:15%;'><?php echo ee()->lang->line('edit_date');?></td>
+					<td class='tableHeadingAlt' style='width:10%;'><?php echo ee()->lang->line('bad_tag');?></td>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<?php if (sizeof($tags) == 0) : ?>
+					<tr>
+						<td class='tableCellOne' colspan="9"><strong><?php echo ee()->lang->line('no_tags_found');?></strong></td>
+					</tr>
+				<?php endif;?>
+			
+				<?php foreach ($tags as $tag_id => $data) : ?>
+					<?php $class = $this->cycle('tableCellOne', 'tableCellTwo');?>
+					<tr>
+						<td class='<?php echo $class;?>'><input class='checkbox' type='checkbox' name='toggle[]' value='<?php echo $tag_id;?>' id='delete_box_<?php echo $tag_id;?>' /></td>
+						<td class='<?php echo $class;?>'><?php echo $tag_id;?></td>
+						<td class='<?php echo $class;?>'><a href='<?php echo $this->base;?>&method=edit_tag_form&tag_id=<?php echo $tag_id;?>' title="<?php echo ee()->lang->line('edit_tag').' '.$data['tag_name'];?>"><?php echo $data['tag_name'];?></a></td>
+						<td class='<?php echo $class;?>'><a href='<?php echo $this->base;?>&method=weblog_entries_by_tag&tag_id=<?php echo $tag_id;?>' title="<?php echo ee()->lang->line('edit_entries_for_').$data['tag_name'];?>"><?php echo ee()->lang->line('tag_view_entries');?></a></td>
+						<td class='<?php echo $class;?>'><?php echo $data['weblog_entries_count'];?></td>
+						<td class='<?php echo $class;?>'><?php echo $data['screen_name'];?></td>
+						<td class='<?php echo $class;?>'><?php echo ee()->localize->set_human_time($data['entry_date']);?></td>
+						<td class='<?php echo $class;?>'><?php echo ee()->localize->set_human_time($data['edit_date']);?></td>
+						
+						<?php if (in_array($data['tag_name'], $bad_tags)) : ?>
+							<td class='<?php echo $class;?>'><?php echo ee()->lang->line('bad_tag');?></td>
+						<?php else: ?>
+							<td class='<?php echo $class;?>'><a href='<?php echo $this->base;?>&method=bad_tag&tag_name=<?php echo urlencode(base64_encode($data['tag_name']));?>' title="<?php echo ee()->lang->line('tag_mark_as_bad_').$data['tag_name'];?>"><?php echo ee()->lang->line('add_bad_tag');?></a></td>
+						<?php endif;?>
+					</tr>
+				<?php endforeach;?>
+			</tbody>
+			
+			<?php if (sizeof($tags) > 0) : ?>
+	
+				<tfoot>
+					<tr>
+						<?php $class = $this->cycle('tableCellOne', 'tableCellTwo');?>
+						<td class='<?php echo $class;?>'>
+							<input class='checkbox' type='checkbox' name='toggle_all_checkboxes' value='' />
+							&nbsp;&nbsp;<b><?php echo ee()->lang->line('delete');?></b>
+						</td>
+						<td class='<?php echo $class;?>' colspan="8">&nbsp;</td>
+					</tr>
+				
+				<?php if ($paginate != '') : ?>
+				<?php $class = $this->cycle('tableCellOne', 'tableCellTwo');?>
+					<tr>
+						<td class="<?php echo $class;?>" colspan="9"><?php echo $paginate;?></td>
+					</tr>
+				<?php endif;?>
+			
+				</tfoot>
+			<?php endif; ?>
+			
+		</table>
+		
+		
+		
+		<div class='clearfix' >&nbsp;</div>
+		
+		<div class='itemWrapper' >
+			<input type='submit' class='submit' name="delete_tag_button" value="<?php echo ee()->lang->line('delete');?>"  />
+		</div>
+		
+		<div class='clearfix' >&nbsp;</div>
+</form>
+
+<?php $this->view('footer.html');?>

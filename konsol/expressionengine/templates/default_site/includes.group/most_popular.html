@@ -1,0 +1,13 @@
+<?php
+	$start_time = $this->EE->localize->decode_date("%Y-%m-%d %H:%i", $this->EE->localize->now - 604800);
+?>
+<!-- Begin Most Popular -->
+<div class="sidebar_module">
+	<h3 class="article_section">Popular Recent Items</h3>
+	<ol>
+		{exp:channel:entries channel{snip_all_channels} limit="5" orderby="view_count_one" dynamic="off" status{snip_all_articles} start_on="<?php echo $start_time; ?>" disable="pagination"}
+		<li>{snip_all_permalink_switch}</li>
+		{/exp:channel:entries}
+	</ol>
+</div>
+<!-- End Most Popular -->

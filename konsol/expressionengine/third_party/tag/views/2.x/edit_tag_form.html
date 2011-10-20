@@ -1,0 +1,39 @@
+
+<?php $this->load->view('header.html');?>
+
+
+<form action="<?php echo $base_uri.AMP.'method=edit_tag';?>" method="post">
+	<div class='hidden'>
+		<input type="hidden" name="XID" value="<?php echo $XID_SECURE_HASH;?>" />
+		<input type='hidden' name='tag_id' value='<?php echo $tag_id;?>' />
+	</div>
+
+		<table border='0'  cellspacing='0' cellpadding='0' style='width:100%;'  id="solspaceTable" class='mainTable padTable' >
+			<thead>
+				<tr>
+					<th colspan="2"><?php echo ee()->lang->line('edit_tag');?></th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr class="odd">
+					<td style="width: 25%;" class="oddBold">
+						<label for="tag_name"><?php echo ee()->lang->line('tag');?></label>
+						
+					</td>
+					<td valign="top" style="width: 75%;" class="odd">
+						<input dir='ltr' style='width:75%' type='text' name='tag_name' id='tag_name' value='<?php echo $tag_name;?>' size='35' maxlength='150' class='input'  />
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+	<div class='clearfix' >&nbsp;</div>
+
+	<div class='itemWrapper'>
+		<input type="submit" name="submit" value="<?php echo ee()->lang->line('update_tag');?>" class="submit"  />
+	</div>
+
+</form>
+
+

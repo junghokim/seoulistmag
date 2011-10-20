@@ -1,0 +1,113 @@
+{embed="includes/header"}
+		{embed="includes/masthead"}
+<!-- Begin Column -->
+	<div id="article" class="section_module">
+		{exp:channel:entries channel="columns" limit="1" status{snip_all_articles} track_views="one" disable="pagination"}
+			{categories {categories_top_level}}
+			<h2 class="section_title">{category_name}</h2>
+			{/categories}
+			<h2 class="article_title">{title}</h2>
+			<ul id="article_meta">
+				<li class="byline"><span class="byline_prefix">Written by</span> {author}</li>
+				<li class="byline last"><span class="byline_prefix">Posted on</span> {entry_date {snip_date_short}}</li>
+			</ul>
+			<div id="slides" class="column_slideshow">
+					{columns_image limit="1"}
+					{exp:imgsizer:size src="{column_image}" width="690" server_domain="http://media.seoulistmag.com/" base_path="/home/seoulistmag/media.seoulistmag.com/" base_cache="/home/seoulistmag/media.seoulistmag.com/images/sized/"}
+						<img src="{sized}" width="{width}" height="{height}" alt="{column_image_credit}" />
+					<p class="caption">{column_caption}<span class="photo_credit">{column_image_credit}</span></p>
+					{/exp:imgsizer:size}
+					{/columns_image}
+			</div>
+			<div id="below_the_fold">
+				<div id="article_content">
+					<p class="logline">{columns_logline}</p>
+					{columns_body}
+				</div>
+				{embed="includes/sidebar"}
+			</div>
+			{columns_additional_information}
+			{if no_results}
+			{/if}
+			<div id="additional_information" class="section_module">
+				<h2 class="article_section grey">Additional Information</h2>
+				<div class="additional_information_module">
+					<span class="info_name">{columns_additional_name}</span>
+					<ul>
+						<li class="info_heading">Hours
+							<ul>
+								<li>{columns_additional_hours}</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="additional_information_module">
+					<ul>
+						<li class="info_heading">Address
+							<ul>
+								<li>{columns_additional_address}</li>
+								<li>{columns_additional_map_link}</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="additional_information_module">
+					<ul>
+						<li class="info_heading">Phone
+							<ul>
+								<li>{columns_additional_phone}</li>
+							</ul>
+						</li>
+						<li class="info_heading">Website
+							<ul>
+								<li><a href="http://{articles_additional_website}">{columns_additional_website}</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="additional_information_module">
+					<ul>
+						<li class="info_heading">Notes
+							<ul>
+								<li>{columns_additional_notes}</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			{/columns_additional_information}
+			{embed="includes/itemsofinterest"}
+			<div class="section_module">
+				<div id="author_info" class="section_module">
+					<h2 class="article_section grey">About the author</h2>
+					<img src="{photo_url}" width="80" height="80" alt="{author}" />
+					<p>{bio}</p>
+				</div>
+				<div id="comments">
+					<h3>Join the Conversation</h3>
+					<div id="disqus_container">
+						<div id="disqus_thread"></div>
+						<script type="text/javascript">
+						    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+						    var disqus_shortname = 'seoulist-mag'; // required: replace example with your forum shortname
+
+						    // The following are highly recommended additional parameters. Remove the slashes in front to use.
+						    // var disqus_identifier = 'unique_dynamic_id_1234';
+						    // var disqus_url = 'http://example.com/permalink-to-page.html';
+
+						    /* * * DON'T EDIT BELOW THIS LINE * * */
+						    (function() {
+						        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+						        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+						        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+						    })();
+						</script>
+						<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+						<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+					</div>
+				</div>
+			</div>
+		{/exp:channel:entries}
+		</div>
+<!-- End Column -->
+		{embed="includes/footer"}

@@ -1,0 +1,28 @@
+{embed="includes/header"}
+		{embed="includes/masthead"}
+<!-- Begin Search Results -->
+	<div id="search" class="section_module">
+		<h2 class="section_title">You searched for &ldquo;{exp:search:keywords}&rdquo;, we found...</h2>
+		<ul id="search_results">
+			{exp:search:search_results}
+			<li>
+				<h3>
+					<a href="{title_permalink="articles/index"}">{title}</a>
+				</h3>
+				{exp:eehive_hacksaw words="30" allow="<p></p><b><a>" append="..."}
+				{articles_body}
+				{/exp:eehive_hacksaw}
+				</p>
+				<ul id="article_meta">
+					<li class="first"><span class="byline_prefix">Written by</span> {author}</li>
+					<li><span class="byline_prefix">Posted on</span> {entry_date {snip_date_short}}</li>
+					<li class="section">{categories {categories_top_level}}{category_name}{/categories}</li>
+				</ul>
+			</li>
+			{/exp:search:search_results}
+		</ul>
+		{embed="includes/sidebar-search"}
+	{embed="includes/itemsofinterest"}
+	</div>
+<!-- End Search Results -->
+	{embed="includes/footer"}

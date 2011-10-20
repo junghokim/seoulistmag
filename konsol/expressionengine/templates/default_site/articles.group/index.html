@@ -1,0 +1,104 @@
+{embed="includes/header"}
+	{embed="includes/masthead"}
+<!-- Begin Article -->
+	<div id="article" class="section_module">
+		{exp:channel:entries channel="articles" limit="1" status{snip_all_articles} track_views="one" disable="pagination"}
+			{categories {categories_top_level}}
+			<h2 class="section_title">{category_name}</h2>
+			{/categories}
+			<h2 class="article_title">{title}</h2>			
+			<ul id="article_meta">
+				<li class="byline"><span class="byline_prefix">Written by</span> {author}</li>
+				<li class="byline last"><span class="byline_prefix">Posted on</span> {entry_date {snip_date_short}}</li>
+			</ul>
+			<div id="slides" class="article_slideshow">
+				<ul id="carousel" class="slides_container">
+					{articles_images}
+					{exp:imgsizer:size src="{article_image}" width="690" server_domain="http://media.seoulistmag.com/" base_path="/home/seoulistmag/media.seoulistmag.com/" base_cache="/home/seoulistmag/media.seoulistmag.com/images/sized/"}
+					<li>
+						<img src="{sized}" width="{width}" height="{height}" alt="Photo by {image_credit}" />
+					<p class="caption">{image_caption}<span class="photo_credit"><span class="byline_prefix">Photo by</span> {image_credit}</span></p>
+					</li>
+					{/exp:imgsizer:size}
+					{/articles_images}
+				</ul>
+				<a class="previous" href="#">Previous</a>
+				<a class="next" href="#">Next</a>
+			</div>
+			<div id="below_the_fold">
+				<div id="article_content">
+					<p class="logline">{articles_logline}</p>
+					{articles_body}
+				</div>
+				{embed="includes/sidebar"}
+			</div>
+			{articles_additional_information}
+			{if no_results}
+			{/if}
+			<div id="additional_information" class="section_module">
+				<h2 class="article_section grey">Additional Information</h2>
+				<div class="additional_information_module">
+					<span class="info_name">{articles_additional_name}</span>
+					<ul>
+						<li class="info_heading">Hours
+							<ul>
+								<li>{articles_additional_hours}</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="additional_information_module">
+					<ul>
+						<li class="info_heading">Address
+							<ul>
+								<li>{articles_additional_address}</li>
+								<li>{articles_additional_map_link}</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="additional_information_module">
+					<ul>
+						<li class="info_heading">Phone
+							<ul>
+								<li>{articles_additional_phone}</li>
+							</ul>
+						</li>
+						<li class="info_heading">Website
+							<ul>
+								<li><a href="http://{articles_additional_website}">{articles_additional_website}</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="additional_information_module">
+					<ul>
+						<li class="info_heading">Notes
+							<ul>
+								<li>{articles_additional_notes}</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			{/articles_additional_information}
+			<div class="section_module">
+				<div id="author_info" class="section_module">
+					<h2 class="article_section grey">About the author</h2>
+					<img src="{photo_url}" width="80" height="80" alt="{author}" />
+					<p>{bio}</p>
+				</div>
+				<div id="comments">
+					<h3>Join the Conversation</h3>
+					<div id="disqus_container">
+						<div id="disqus_thread"></div>
+						{embed="includes/disqus_thread"}
+					</div>
+				</div>
+			</div>
+		{/exp:channel:entries}
+		{embed="includes/itemsofinterest"}
+		</div>
+		
+<!-- End Article -->
+	{embed="includes/footer"}

@@ -1,0 +1,38 @@
+
+<?php $this->load->view('header.html');?>
+
+<form action="<?php echo $base_uri;?>&method=add_bad_tags" name='target' id='target' method='post'>
+	<div class='hidden'><input type="hidden" name="XID" value="<?php echo $XID_SECURE_HASH;?>" /></div>
+
+		<table class='mainTable padTable'  style='width:100%;'  cellspacing='0'  cellpadding='0'  border='0' >
+			<thead>
+				<tr>
+					<th colspan="2"><?php echo ee()->lang->line('add_bad_tags');?></td>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr>
+					<td class='odd' style="vertical-align: top; width:30%;">
+						<label for="tag_name" class="defaultBold"><?php echo ee()->lang->line('tags');?></label>
+						<div class="subtext"><?php echo ee()->lang->line('add_bad_tags_instructions');?></div>
+					</td>
+					<td class='odd' >
+						<textarea  dir='ltr'  style='width:70%;' name='tag_name' id='tag_name' cols='90' rows='10' class='textarea' ></textarea>
+					</td>
+				</tr>
+			</tbody>
+			
+		</table>
+		
+		
+		
+		<div class='clearfix' >&nbsp;</div>
+		
+		<div class='itemWrapper' >
+			<input type='submit' class='submit' name="add_bad_tag_button" value="<?php echo ee()->lang->line('add_bad_tags');?>"  />
+		</div>
+		
+		<div class='clearfix' >&nbsp;</div>
+</form>
+

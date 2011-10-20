@@ -1,0 +1,44 @@
+
+<?php $this->load->view('header.html');?>
+
+
+<form action="<?php echo $base_uri.AMP.'method=delete_bad_tag';?>" method="post">
+	<div class='hidden'>
+		<input type="hidden" name="XID" value="<?php echo $XID_SECURE_HASH;?>" />
+		<?php foreach($tag_ids as $tag_id) : ?>
+			<input type="hidden" name="delete[]" value="<?php echo $tag_id;?>" />
+		<?php endforeach;?>
+	</div>
+	
+	<div class='clearfix' >&nbsp;</div>
+	
+	<table class='mainTable padTable' id="solspaceTable" style='width:100%;'  cellspacing='0'  cellpadding='0'  border='0' >
+	
+		<thead>
+			<tr>
+				<th><?php echo $page_title;?></th>
+			</tr>
+		</thead>
+	
+		<tbody>
+			<tr class="odd">
+				<td>
+					<p class="defaultBold"><?php echo $bad_tag_delete_question;?></p>
+				
+					<br />
+				
+					<div class='alert'><?php echo ee()->lang->line('action_can_not_be_undone');?></div>
+							
+					<br />		
+							
+					<div class='clearfix'>
+						<input type="submit" name="submit" value="<?php echo ee()->lang->line('remove_bad_tags');?>" class="submit"  />
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div class='clearfix' >&nbsp;</div>
+	
+</form>

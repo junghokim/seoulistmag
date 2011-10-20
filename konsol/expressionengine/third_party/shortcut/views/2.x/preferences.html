@@ -1,0 +1,41 @@
+<?php echo $this->load->view('header.html'); ?>
+
+<div class="clear_left"></div>
+
+	<div class="pageContents">
+		<form method="post" id="prefs_form" action="<?php echo $caller->output($base_uri.'&method=preferences');?>">
+		<input type="hidden" name="XID" value="<?php echo $XID_SECURE_HASH;?>" />
+		<table id="entries" class="mainTable padTable" border="0" cellspacing="0" cellpadding="0">
+			<thead>
+				<tr>
+					<th class="tableHeadingAlt" colspan="2"><?=ee()->lang->line('preferences_exp'); ?></th>
+				</tr>
+			</thead>
+			<tbody>
+			<tr class="odd">
+				<td class="tableCellOne"><label for="shortcut_prefix"><?=ee()->lang->line('shortcut_prefix'); ?></label>
+                <div class="subtext"><?=ee()->lang->line('shortcut_prefix_exp'); ?></div>
+</td>
+				<td class="tableCellOne">
+					<input type="text" name="shortcut_prefix" id="shortcut_prefix" value="<?=$prefs['shortcut_prefix']; ?>" class="input" style="width:50px;" />
+				</td>
+			</tr>
+			<!-- Shortcut prefix -->
+			<tr class="even">
+				<td class="tableCellOne"><label for="shortcut_base"><?=ee()->lang->line('shortcut_base'); ?></label>
+                <div class="subtext"><?=ee()->lang->line('shortcut_base_exp'); ?></div></td>
+				<td class="tableCellOne">
+					<input type="text" name="shortcut_base" id="shortcut_base" value="<?=$prefs['shortcut_base']; ?>" class="input" />
+				</td>
+			</tr>
+			<!-- Shortcut base -->
+			</tbody>
+		</table>
+		<div class='clearfix' >&nbsp;</div>
+		<div class='itemWrapper'>
+			<input type="submit" name="submit" class="submit" value="<?=ee()->lang->line('submit'); ?>" />
+		</div>
+		</form>
+	</div>
+	
+<?php echo $this->load->view('footer.html'); ?>
