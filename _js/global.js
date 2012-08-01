@@ -42,7 +42,7 @@ $(document).ready(function() {
 	}
 	// Initialize Slides
 	$('#slides.featured_articles').slides({
-		preload: true,
+		preload: false,
 		preloadImage: '_images/loading.gif',
 		generatePagination: true,
 		play: 8000,
@@ -58,7 +58,7 @@ $(document).ready(function() {
 	});
 	
 	$('#slides.article_slideshow').slides({
-		preload: true,
+		preload: false,
 		preloadImage: '_images/loading.gif',
 		generatePagination: true,
 		play: 7500,
