@@ -5,7 +5,7 @@ $active_record = TRUE;
 
 $db['expressionengine']['hostname'] = "localhost";
 $db['expressionengine']['username'] = "root";
-$db['expressionengine']['password'] = "root";
+$db['expressionengine']['password'] = "Hongdae!";
 /*
 $db['expressionengine']['hostname'] = "mysql.seoulistmag.com";
 $db['expressionengine']['username'] = "seoulistmagcom";
